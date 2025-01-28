@@ -41,7 +41,7 @@ export const useProductStore = create((set) => ({
   },
   updateProduct: async (pid, updatedProduct) => {
     const res = await fetch(`/api/products/${pid}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },

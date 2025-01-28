@@ -28,10 +28,11 @@ const ProductCard = ({ product }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const { deleteProduct, updateProduct } = useProductStore();
+
   const textColor = useColorModeValue('gray.600', 'gray.200');
   const bg = useColorModeValue('white', 'gray.800');
 
-  const { deleteProduct } = useProductStore();
   const toast = useToast();
 
   const handleDeleteProduct = async (pid) => {
@@ -53,6 +54,27 @@ const ProductCard = ({ product }) => {
         isClosable: true,
       });
     }
+  };
+
+  const handleUpdateProduct = async (pid, updatedProduct) => {
+    const { success, message } = await updateProduct(pid, updatedProduct);
+    onClose();
+    if (!success) {
+      toast({
+        title: 'Error',
+        description: message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+    toast({
+      title: 'Success',
+      description: 'Updated Successfully!',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   return (
