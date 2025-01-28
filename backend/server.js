@@ -1,12 +1,8 @@
 import express from 'express';
 import 'dotenv/config';
 import { connectDB } from './config/db.js';
-import {
-  createProduct,
-  deleteProduct,
-  getAllProducts,
-  updateProduct,
-} from './controllers/product.controller.js';
+
+import productRoutes from './routes/product.route.js';
 
 // Initialising PORT from env to the PORT var
 const PORT = process.env.PORT;
@@ -19,15 +15,9 @@ const app = express();
 // using middleware to parse body !
 app.use(express.json());
 
-// routes
+// middleware to call routers...
 
-app.get('/api/products', getAllProducts);
-
-app.post('/api/products', createProduct);
-
-app.patch('/api/products/:id', updateProduct);
-
-app.delete('/api/products/:id', deleteProduct);
+app.use('/api/products', productRoutes);
 
 // Starting the server
 
