@@ -13,6 +13,7 @@ import { LuSun } from 'react-icons/lu';
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Container minW={'1920px'} px={4}>
       <Flex
