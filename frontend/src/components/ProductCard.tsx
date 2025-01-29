@@ -22,8 +22,10 @@ import {
 } from '@chakra-ui/react';
 import { useProductStore } from '../store/product';
 import { useState } from 'react';
+import { UpdateProductModel } from '../ProductModel/updateProductModel';
+import { ProductModel } from '../ProductModel/productModel';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product }: ProductModel) => {
   const [updatedProduct, setUpdatedProduct] = useState(product);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,7 +37,7 @@ const ProductCard = ({ product }) => {
 
   const toast = useToast();
 
-  const handleDeleteProduct = async (pid) => {
+  const handleDeleteProduct = async (pid: string) => {
     const { success, message } = await deleteProduct(pid);
     if (!success) {
       toast({
@@ -56,7 +58,10 @@ const ProductCard = ({ product }) => {
     }
   };
 
-  const handleUpdateProduct = async (pid, updatedProduct) => {
+  const handleUpdateProduct = async (
+    pid: string,
+    updatedProduct: UpdateProductModel
+  ) => {
     const { success, message } = await updateProduct(pid, updatedProduct);
     onClose();
     if (!success) {
